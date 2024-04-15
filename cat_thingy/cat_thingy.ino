@@ -4,6 +4,7 @@
 int servoPin = 2; 
 // Create a servo object 
 Servo Servo1; 
+int i = 0;
 const int trigPin = 12;
 const int echoPin = 13;
 long duration;
@@ -34,11 +35,16 @@ void loop(){
 }
 
 void rotate_servo(){
-   Servo1.write(0); 
-   delay(1000); 
-   // Make servo go to 180 degrees 
-   Servo1.write(180); 
-   delay(1000); 
-   Servo1.write(0);
-   delay(5000);
+  while (i < 180){
+   Servo1.write(i); 
+   delay(100); 
+   i = i + 3;
+   Serial.println(i);
+  }
+  while (i > 0){
+    Servo1.write(i);
+    delay(100);
+    i = i - 3;
+    Serial.println(i);
+  }
 }
