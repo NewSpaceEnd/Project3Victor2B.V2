@@ -4,17 +4,17 @@
 int servoPin = 2; 
 // Create a servo object 
 Servo Servo1; 
-int i = 0;
-const int trigPin = 12;
+int i = 0; //Används vid rotationen av servon
+const int trigPin = 12; //Sätter upp Depth sensorn
 const int echoPin = 13;
 long duration;
 int distance;
 void setup() { 
-   // We need to attach the servo to the used pin number 
+   //Attach the servo to the used pin number 
    Servo1.attach(servoPin); 
    pinMode(trigPin, OUTPUT);
    pinMode(echoPin, INPUT);
-   Serial.begin(9600); //Användes under debugging och används inte längre då 
+   Serial.begin(9600); //Användes under debugging och används inte längre då, men är kvar då man kanske vill kolla värdet 
 }
 void loop(){ 
    digitalWrite(trigPin, LOW); 
@@ -27,13 +27,13 @@ void loop(){
 
    Serial.println(distance); //Användes under kalibreringen för att hitta ett bra avstånd där bromsträckan var tillräckligt lång men samtidigt inte för lång.
 
-   
+   //När man kommer tillräckligt nära ska servon börja rotera
    if (distance < 5){
     rotate_servo(); 
    }
    
 }
-
+/Roterar servon sakta 180 grader för att sedan rotera tillbaka servon 180 grader
 void rotate_servo(){
   while (i < 180){
    Servo1.write(i); 
